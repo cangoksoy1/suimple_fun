@@ -2,6 +2,7 @@ module suimple_fun::suimple_fun {
     // === Imports ===
 
     use std::type_name::{Self, TypeName};
+    use std::debug; // For debugging
 
     use sui::{
         sui::SUI,
@@ -52,7 +53,6 @@ module suimple_fun::suimple_fun {
 
     public struct Config has key {
         id: UID,
-        /// type_name::get<PoolKey>() => Pool address
         pools: Table<TypeName, address>,
         admin: address,
         create_fee: u64,
