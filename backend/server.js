@@ -8,7 +8,7 @@ const server = http.createServer(app);
 const io = socketIo(server);
 
 // Connect to Sui Network
-const web3 = new Web3('https://sui-network-url'); // Update with the actual Sui network URL
+const web3 = new Web3('https://fullnode.devnet.sui.io'); // Update with the actual Sui network URL
 const contractAddress = '0xYourContractAddress'; // Update with your contract address
 const contractABI = [ /* ABI JSON here */ ]; // Update with your contract ABI
 
