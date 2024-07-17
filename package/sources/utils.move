@@ -1,4 +1,4 @@
-module memez_fun::memez_fun_utils {
+module suimple_fun::suimple_fun_utils {
     // === Imports ===
 
     use std::type_name;
