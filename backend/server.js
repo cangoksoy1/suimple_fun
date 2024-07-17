@@ -1,16 +1,35 @@
-
 const express = require('express');
 const http = require('http');
 const socketIo = require('socket.io');
+const Web3 = require('web3');
 
 const app = express();
 const server = http.createServer(app);
 const io = socketIo(server);
 
+// Connect to Sui Network
+const web3 = new Web3('https://sui-network-url'); // Update with the actual Sui network URL
+const contractAddress = '0xYourContractAddress'; // Update with your contract address
+const contractABI = [ /* ABI JSON here */ ]; // Update with your contract ABI
+
+const contract = new web3.eth.Contract(contractABI, contractAddress);
+
+// Endpoint to fetch data from Sui Network
+app.get('/api/data', async (req, res) => {
+    try {
+        const data = await contract.methods.yourMethod().call(); // Replace 'yourMethod' with your contract method
+        res.json(data);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+// Simple root endpoint
 app.get('/', (req, res) => {
   res.send('Hello World');
 });
 
+// WebSocket connection and event handling
 io.on('connection', (socket) => {
   console.log('a user connected');
 
