@@ -14,22 +14,15 @@ const contractABI = [ /* ABI JSON here */ ]; // Update with your contract ABI
 
 const contract = new web3.eth.Contract(contractABI, contractAddress);
 
-// Endpoint to fetch data from Sui Network
 app.get('/api/data', async (req, res) => {
-    try {
-        const data = await contract.methods.yourMethod().call(); // Replace 'yourMethod' with your contract method
-        res.json(data);
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
+  try {
+    const data = await contract.methods.yourMethod().call();
+    res.json(data);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
 });
 
-// Simple root endpoint
-app.get('/', (req, res) => {
-  res.send('Hello World');
-});
-
-// WebSocket connection and event handling
 io.on('connection', (socket) => {
   console.log('a user connected');
 
