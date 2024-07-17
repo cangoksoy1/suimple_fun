@@ -1,14 +1,14 @@
 #[test_only]
-module memez_fun::memez_fun_test_utils {
+module suimple_fun::suimple_fun_test_utils {
 
     use sui::{
         sui::SUI,
         test_utils::assert_eq
     };
 
-    use memez_fun::{
+    use suimple_fun::{
         eth::ETH,
-        memez_fun_utils::{is_coin_x, are_coins_ordered}
+        suimple_fun_utils::{is_coin_x, are_coins_ordered}
     };
 
     public struct ABC {}
@@ -34,7 +34,7 @@ module memez_fun::memez_fun_test_utils {
     }
 
     #[test]
-    #[expected_failure(abort_code = memez_fun::memez_fun_errors::SAME_COINS_NOT_ALLOWED, location = memez_fun::memez_fun_utils)]
+    #[expected_failure(abort_code = suimple_fun::suimple_fun_errors::SAME_COINS_NOT_ALLOWED, location = suimple_fun::suimple_fun_utils)]
     fun test_are_coins_ordered_error_same_coins_not_allowed() {
         are_coins_ordered<SUI, SUI>();
     }
