@@ -1,4 +1,4 @@
-module memez_fun::memez_fun {
+module suimple_fun::suimple_fun {
     // === Imports ===
 
     use std::type_name::{Self, TypeName};
@@ -15,12 +15,12 @@ module memez_fun::memez_fun {
 
     use suitears::math64::{mul_div_up, min};
     
-    use memez_v2_invariant::memez_v2_invariant::{invariant_, get_amount_out};
+    use memez_v2_invariant::suimple_v2_invariant::{invariant_, get_amount_out};
 
-    use memez_fun::{
-        memez_fun_utils as utils,
-        memez_fun_errors as errors,
-        memez_fun_events as events,
+    use suimple_fun::{
+        suimple_fun_utils as utils,
+        suimple_fun_errors as errors,
+        suimple_fun_events as events,
     };
 
     // === Constants ===
