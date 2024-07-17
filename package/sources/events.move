@@ -1,14 +1,17 @@
 module suimple_fun::suimple_fun_events {
+
     // === Imports ===
 
-    use std::type_name::TypeName;
-
     use sui::event::emit;
+    use sui::tx_context::TxContext;
+    use sui::object::UID;
+    use std::type_name::TypeName;
+    use sui::address::address;
 
-    // === Structs ===
+    // === Events ===
 
-    public struct NewFunPool has copy, drop, store {
-        pool: address,
+    public event NewFunPool {
+        pool_id: address,
         coin_x: TypeName,
         coin_y: TypeName,
         balance_x: u64,
@@ -16,11 +19,11 @@ module suimple_fun::suimple_fun_events {
         liquidity_x: u64,
         liquidity_y: u64,
         is_x_virtual: bool,
-        migration_witness: TypeName
+        witness: TypeName
     }
 
-    public struct Swap has copy, drop, store {
-        pool: address,
+    public event Swap {
+        pool_id: address,
         coin_in: TypeName,
         coin_out: TypeName,
         amount_in: u64,
@@ -28,28 +31,28 @@ module suimple_fun::suimple_fun_events {
         fee: u64
     }
 
-    public struct ReadyForMigration has copy, drop, store {
-        pool: address,
+    public event ReadyForMigration {
+        pool_id: address,
         coin_x: TypeName,
         coin_y: TypeName,
-        migration_witness: TypeName
+        witness: TypeName
     }
 
-    public struct Migrated has copy, drop, store {
-        pool: address,
+    public event Migrated {
+        pool_id: address,
         coin_x: TypeName,
         coin_y: TypeName,
-        amount_x: u64,
-        amount_y: u64,
-        admin_x: u64,
-        admin_y: u64,
-        migration_witness: TypeName
+        balance_x: u64,
+        balance_y: u64,
+        admin_balance_x: u64,
+        admin_balance_y: u64,
+        witness: TypeName
     }
 
-    // === Public-Package Functions ===
+    // === Public Functions ===
 
-    public(package) fun new_fun_pool(
-        pool: address,
+    public fun new_fun_pool(
+        pool_id: address,
         coin_x: TypeName,
         coin_y: TypeName,
         balance_x: u64,
@@ -57,80 +60,76 @@ module suimple_fun::suimple_fun_events {
         liquidity_x: u64,
         liquidity_y: u64,
         is_x_virtual: bool,
-        migration_witness: TypeName
+        witness: TypeName,
+        ctx: &TxContext
     ) {
-        emit(
-            NewFunPool {
-                pool,
-                coin_x,
-                coin_y,
-                balance_x,
-                balance_y,
-                liquidity_x,
-                liquidity_y,
-                is_x_virtual,
-                migration_witness
-            }
-        );
+        emit NewFunPool {
+            pool_id,
+            coin_x,
+            coin_y,
+            balance_x,
+            balance_y,
+            liquidity_x,
+            liquidity_y,
+            is_x_virtual,
+            witness
+        };
     }
 
-    public(package) fun swap(
-        pool: address,
+    public fun swap(
+        pool_id: address,
         coin_in: TypeName,
         coin_out: TypeName,
         amount_in: u64,
         amount_out: u64,
-        fee: u64
+        fee: u64,
+        ctx: &TxContext
     ) {
-        emit(
-            Swap {
-                pool,
-                coin_in,
-                coin_out,
-                amount_in,
-                amount_out,
-                fee
-            }
-        );
+        emit Swap {
+            pool_id,
+            coin_in,
+            coin_out,
+            amount_in,
+            amount_out,
+            fee
+        };
     }
 
-    public(package) fun ready_for_migration(
-        pool: address,
+    public fun ready_for_migration(
+        pool_id: address,
         coin_x: TypeName,
         coin_y: TypeName,
-        migration_witness: TypeName
+        witness: TypeName,
+        ctx: &TxContext
     ) {
-        emit(
-            ReadyForMigration {
-                pool,
-                coin_x,
-                coin_y,
-                migration_witness
-            }
-        );
+        emit ReadyForMigration {
+            pool_id,
+            coin_x,
+            coin_y,
+            witness
+        };
     }
 
-    public(package) fun migrated(
-        pool: address,
+    public fun migrated(
+        pool_id: address,
         coin_x: TypeName,
         coin_y: TypeName,
-        amount_x: u64,
-        amount_y: u64,
-        admin_x: u64,
-        admin_y: u64,
-        migration_witness: TypeName
+        balance_x: u64,
+        balance_y: u64,
+        admin_balance_x: u64,
+        admin_balance_y: u64,
+        witness: TypeName,
+        ctx: &TxContext
     ) {
-        emit(
-            Migrated {
-                pool,
-                coin_x,
-                coin_y,
-                amount_x,
-                amount_y,
-                admin_x,
-                admin_y,
-                migration_witness
-            }
-        );
+        emit Migrated {
+            pool_id,
+            coin_x,
+            coin_y,
+            balance_x,
+            balance_y,
+            admin_balance_x,
+            admin_balance_y,
+            witness
+        };
     }
 }
