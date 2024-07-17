@@ -1,5 +1,5 @@
 #[test_only]
-module memez_fun::memez_fun_tests_set_up {
+module suimple_fun::suimple_fun_tests_set_up {
     // === Imports ===
 
     use sui::{
@@ -9,11 +9,11 @@ module memez_fun::memez_fun_tests_set_up {
         coin::{Self, TreasuryCap, CoinMetadata},
     };
 
-    use memez_fun::{
+    use suimple_fun::{
         eth::{Self, ETH},
         usdc::{Self, USDC},
         meme::{Self, MEME},
-        memez_fun::{Self, FunPool, Admin, Config},
+        suimple_fun::{Self, FunPool, Admin, Config},
     };
 
     // === Constants ===
@@ -43,7 +43,7 @@ module memez_fun::memez_fun_tests_set_up {
 
         scenario.next_tx(OWNER);
 
-        memez_fun::init_for_testing(scenario.ctx());
+        suimple_fun::init_for_testing(scenario.ctx());
         eth::init_for_testing(scenario.ctx());
         usdc::init_for_testing(scenario.ctx());
         meme::init_for_testing(scenario.ctx());
@@ -63,7 +63,7 @@ module memez_fun::memez_fun_tests_set_up {
         // 20 ETH
         config.update_migration_liquidity<ETH>(&admin, 20_000_000_000);
 
-        let pool = memez_fun::new<MEME, ETH, IPXWitness>(
+        let pool = suimple_fun::new<MEME, ETH, IPXWitness>(
             &mut config,
             meme_tc,
             &meme_metadata,
