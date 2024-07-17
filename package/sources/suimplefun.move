@@ -4,6 +4,9 @@ module suimple_fun::suimple_fun {
     use std::type_name::{Self, TypeName};
     use std::debug; // For debugging
 
+public fun some_function() {
+    let some_value = // some operation;
+    debug::print(&some_value);
     use sui::{
         sui::SUI,
         dynamic_field as df,
@@ -16,7 +19,7 @@ module suimple_fun::suimple_fun {
 
     use suitears::math64::{mul_div_up, min};
     
-    use memez_v2_invariant::suimple_v2_invariant::{invariant_, get_amount_out};
+    use suimple_v2_invariant::suimple_v2_invariant::{invariant_, get_amount_out};
 
     use suimple_fun::{
         suimple_fun_utils as utils,
@@ -588,4 +591,5 @@ module suimple_fun::suimple_fun {
     public fun init_for_testing(ctx: &mut TxContext) {
         init(ctx);
     }
+}
 }
