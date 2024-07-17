@@ -4,9 +4,6 @@ module suimple_fun::suimple_fun {
     use std::type_name::{Self, TypeName};
     use std::debug; // For debugging
 
-public fun some_function() {
-    let some_value = // some operation;
-    debug::print(&some_value);
     use sui::{
         sui::SUI,
         dynamic_field as df,
@@ -592,4 +589,4 @@ public fun some_function() {
         init(ctx);
     }
 }
-}
+
