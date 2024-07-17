@@ -1,5 +1,5 @@
 #[test_only]
-module memez_fun::memez_fun_test_quote {
+module suimple_fun::suimple_fun_test_quote {
 
     use sui::{
         test_utils::assert_eq,
@@ -8,13 +8,13 @@ module memez_fun::memez_fun_test_quote {
 
     use suitears::math64::{mul_div_up, min};
 
-    use memez_v2_invariant::memez_v2_invariant::{get_amount_in, get_amount_out};
+    use suimple_v2_invariant::suimple_v2_invariant::{get_amount_in, get_amount_out};
 
-    use memez_fun::{
+    use suimple_fun::{
         eth::ETH,
         meme::MEME,
-        memez_fun_quote,
-        memez_fun_tests_set_up::start_world
+        suimple_fun_quote,
+        suimple_fun_tests_set_up::start_world
     };
 
     const PRECISION: u64 = 1_000_000_000;
@@ -29,11 +29,11 @@ module memez_fun::memez_fun_test_quote {
         // 5 MEME
         let meme_amount_in = 5_000_000_000;
 
-        let quote_amount = memez_fun_quote::amount_out<MEME, ETH>(world.pool(), meme_amount_in);
+        let quote_amount = suimple_fun_quote::amount_out<MEME, ETH>(world.pool(), meme_amount_in);
 
         assert_eq(quote_amount, 0);
 
-        let quote_amount = memez_fun_quote::amount_out<ETH, MEME>(world.pool(), eth_amount_in);
+        let quote_amount = suimple_fun_quote::amount_out<ETH, MEME>(world.pool(), eth_amount_in);
 
         let liquidity_eth = world.pool().liquidity_x<ETH, MEME>();
         let liquidity_meme = world.pool().liquidity_y<ETH, MEME>();
@@ -88,11 +88,11 @@ module memez_fun::memez_fun_test_quote {
         let meme_amount_out = 5_000_000_000;
 
         // Pool does not have any ETH to get out
-        let quote_amount = memez_fun_quote::amount_in<MEME, ETH>(world.pool(), eth_amount_out);
+        let quote_amount = suimple_fun_quote::amount_in<MEME, ETH>(world.pool(), eth_amount_out);
 
         assert_eq(quote_amount, 0);
 
-        let expected_amount_in = memez_fun_quote::amount_in<ETH, MEME>(world.pool(), meme_amount_out);
+        let expected_amount_in = suimple_fun_quote::amount_in<ETH, MEME>(world.pool(), meme_amount_out);
 
         let coin_in = mint_for_testing<ETH>(expected_amount_in, world.scenario().ctx()); 
 
@@ -103,7 +103,7 @@ module memez_fun::memez_fun_test_quote {
 
         assert_within_1_percent(meme_amount_out, coin_out.burn_for_testing());
 
-        let expected_amount_in = memez_fun_quote::amount_in<MEME, ETH>(world.pool(), 123);
+        let expected_amount_in = suimple_fun_quote::amount_in<MEME, ETH>(world.pool(), 123);
 
         let liquidity_eth = world.pool().liquidity_x<ETH, MEME>();
         let liquidity_meme = world.pool().liquidity_y<ETH, MEME>();
