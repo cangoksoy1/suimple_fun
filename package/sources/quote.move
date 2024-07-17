@@ -1,12 +1,12 @@
-module memez_fun::memez_fun_quote {
+module suimple_fun::suimple_fun_quote {
     // === Imports ===
 
-    use memez_fun::{
-        memez_fun::FunPool,
-        memez_fun_utils as utils
+    use suimple_fun::{
+        suimple_fun::FunPool,
+        suimple_fun_utils as utils
     };
 
-    use memez_v2_invariant::memez_v2_invariant::get_amount_out;
+    use suimple_v2_invariant::suimple_v2_invariant::get_amount_out;
 
     use suitears::math64::{mul_div_up, min};
 
