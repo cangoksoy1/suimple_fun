@@ -1,3 +1,4 @@
+npm install @mysten/sui @mysten/dapp-kit @tanstack/react-query
 {
   "name": "backend",
   "version": "1.0.0",
