@@ -1,5 +1,5 @@
 #[test_only]
-module memez_fun::eth {
+module suimple_fun::eth {
     use sui::coin;
 
     public struct ETH has drop {}
@@ -27,7 +27,7 @@ module memez_fun::eth {
 }
 
 #[test_only]
-module memez_fun::usdc {
+module suimple_fun::usdc {
     use sui::coin;
 
     public struct USDC has drop {}
@@ -55,7 +55,7 @@ module memez_fun::usdc {
 }
 
 #[test_only]
-module memez_fun::meme {
+module suimple_fun::meme {
     use sui::coin;
 
     public struct MEME has drop {}
