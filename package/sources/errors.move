@@ -1,4 +1,4 @@
-module memez_fun::memez_fun_errors {
+module suimple_fun::suimple_fun_errors {
 
     // === Constants ===
 
